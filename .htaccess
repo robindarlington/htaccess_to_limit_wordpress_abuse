@@ -1,0 +1,12 @@
+# disable xmlrpc
+<FilesMatch "^xmlrpc\.php$">
+  Require all denied
+</FilesMatch>
+
+#disale sql injection attempts
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} (union.*select|select.*from|information_schema|extractvalue|concat|elt|hex|sleep|waitfor|declare|dbms_pipe|order.*by) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>
+
+
